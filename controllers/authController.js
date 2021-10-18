@@ -15,8 +15,13 @@ router.get('/login', (req, res) => {
     res.render('login');
 });
 
-router.post('/login', (req, res) => {
-    res.redirect('/');
+router.post('/login', (req, res, next) => {
+    const { username, password } = req.body;
+    authService.login(username, password)
+        .then((user) => {
+            res.redirect('/');
+        })
+        .catch(next);
 });
 
 router.post('/register',
