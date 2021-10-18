@@ -45,4 +45,10 @@ router.post('/register',
             .catch(error => next(error))
     }
 );
+
+router.get('/logout', (req, res) => {
+    res.clearCookie('token');
+    res.redirect('/');
+});
+
 module.exports = router;
