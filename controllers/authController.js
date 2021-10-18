@@ -22,6 +22,7 @@ router.post('/register', (req, res, next) => {
     const { username, password } = req.body;
     authService.register(username, password)
         .then((createdUser) => {
+            console.log(createdUser)
             res.redirect('/auth/login');
         })
         .catch(error => next(error))
