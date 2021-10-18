@@ -1,3 +1,5 @@
+const authService = require('../services/authService');
+
 const router = require('express').Router();
 
 router.get('/', (req, res) => {
@@ -16,8 +18,12 @@ router.post('/login', (req, res) => {
     res.redirect('/');
 });
 
-router.post('/register', (req, res) => {
-    console.log(req.body);
-    res.redirect('/auth/login');
+router.post('/register', (req, res, next) => {
+    const { username, password } = req.body;
+    authService.register(username, password)
+        .then((createdUser) => {
+            res.redirect('/auth/login');
+        })
+        .catch(error => next(error))
 });
 module.exports = router;
