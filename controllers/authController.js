@@ -18,7 +18,8 @@ router.get('/login', (req, res) => {
 router.post('/login', (req, res, next) => {
     const { username, password } = req.body;
     authService.login(username, password)
-        .then((user) => {
+        .then((token) => {
+            res.cookie('token', token);
             res.redirect('/');
         })
         .catch(next);
