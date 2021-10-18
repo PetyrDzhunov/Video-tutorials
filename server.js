@@ -3,6 +3,8 @@ const app = express();
 const { PORT } = require('./config/config');
 
 require('./config/mongoose');
+
+
 app.get('/', (req, res) => {
     res.send('working')
 });
