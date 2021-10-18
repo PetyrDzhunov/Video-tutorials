@@ -34,7 +34,6 @@ router.post('/register',
         const { username, password } = req.body;
         authService.register(username, password)
             .then((createdUser) => {
-                conosle.log(createdUser);
                 res.redirect('/auth/login');
             })
             .catch(error => next(error))
