@@ -1,6 +1,7 @@
 const express = require('express');
 const cookieParser = require('cookie-parser');
 const hbs = require('express-handlebars');
+const auth = require('../middlewares/auth');
 
 module.exports = (app) => {
     app.engine('hbs', hbs({
@@ -11,4 +12,6 @@ module.exports = (app) => {
     app.use(express.urlencoded({ extended: true }));
     // so we can parse incomming data from request body
     app.use(cookieParser());
+
+    app.use(auth);
 }

@@ -1,5 +1,6 @@
 const authService = require('../services/authService');
 const { body, validationResult } = require('express-validator');
+const { COOKIE_NAME } = require('../config/config');
 
 const router = require('express').Router();
 
@@ -19,7 +20,7 @@ router.post('/login', (req, res, next) => {
     const { username, password } = req.body;
     authService.login(username, password)
         .then((token) => {
-            res.cookie('token', token);
+            res.cookie(COOKIE_NAME, token);
             res.redirect('/');
         })
         .catch(next);
@@ -47,7 +48,7 @@ router.post('/register',
 );
 
 router.get('/logout', (req, res) => {
-    res.clearCookie('token');
+    res.clearCookie(COOKIE_NAME);
     res.redirect('/');
 });
 
