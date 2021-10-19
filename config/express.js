@@ -13,5 +13,5 @@ module.exports = (app) => {
     // so we can parse incomming data from request body
     app.use(cookieParser());
 
-    app.use(auth);
+    // app.use(auth);
 }
