@@ -20,8 +20,6 @@ userSchema.pre('save', function(next) {
     bcrypt.genSalt(SALT_ROUNDS)
         .then(salt => bcrypt.hash(this.password, salt))
         .then(hash => {
-            console.log('in hash');
-            console.log(hash);
             this.password = hash
             next();
         });
