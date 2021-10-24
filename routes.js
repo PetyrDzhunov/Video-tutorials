@@ -7,7 +7,7 @@ const courseController = require('./controllers/courseController');
 
 router.use('/', homeController);
 router.use('/auth', authController);
-router.use('/courses', courseController);
+router.use('/course', courseController);
 
 
 module.exports = router;
