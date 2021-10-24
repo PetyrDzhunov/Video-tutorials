@@ -14,7 +14,7 @@ const userSchema = new mongoose.Schema({
         unique: true,
     },
 
-    enrolledCoursers: [{
+    enrolledCourses: [{
         type: mongoose.Types.ObjectId,
         ref: "Course"
     }]
