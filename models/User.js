@@ -12,7 +12,12 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true,
         unique: true,
-    }
+    },
+
+    enrolledCoursers: [{
+        type: mongoose.Types.ObjectId,
+        ref: "Course"
+    }]
 });
 
 userSchema.pre('save', function(next) {
