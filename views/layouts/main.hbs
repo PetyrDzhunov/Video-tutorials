@@ -24,7 +24,7 @@
           </li>
 
           <li class='nav-item'>
-            <a class='nav-link' href='/'>Welcome, {{username}}</a>
+            <a class='nav-link' href='/'>Welcome, {{user.username}}</a>
           </li>
 
           <li class='nav-item'>
@@ -41,10 +41,11 @@
 
         </ul>
       </nav>
-
-      <section class='notifications'>
-        <p class='notification-message'>Message...</p>
-      </section>
+      {{#if error}}
+        <section class='notifications'>
+          <p class='notification-message'>{{error.message}}</p>
+        </section>
+      {{/if}}
       {{{body}}}
       <footer class='page-footer font-small'>
         <div class='footer-copyright text-center py-3'>© 2019
