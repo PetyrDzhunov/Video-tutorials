@@ -32,4 +32,8 @@ const courseScheme = new mongoose.Schema({
         ref: "User"
     }]
 
-})
+});
+
+
+const courseModel = mongoose.model('Course', courseScheme);
+module.exports = courseModel;
