@@ -1,6 +1,6 @@
 const Course = require('../models/Course');
 
-const getAll = () => Course.find({}).lean();
+const getAll = () => Course.find({}).sort({ createdAt: -1 }).lean();
 
 const getOne = (id) => Course.findById(id).lean();
 
