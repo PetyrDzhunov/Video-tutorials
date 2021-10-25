@@ -15,7 +15,6 @@ router.post('/create', (req, res, next) => {
         isPublic: isPublic == 'on' ? true : false,
     };
 
-    console.log(courseData);
 
     courseService.create(courseData)
         .then((createdCourse) => {
