@@ -6,7 +6,6 @@ router.get('/', (req, res, next) => {
     courseService.getAll()
         .then(courses => {
             courses = courses.map(x => ({...x, createdAt: moment(x.createdAt).format('MMMM Do YYYY, h:mm:ss') }))
-
             res.render('home', { courses });
         })
         .catch(next)
