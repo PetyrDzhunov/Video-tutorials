@@ -35,5 +35,11 @@ const courseScheme = new mongoose.Schema({
 });
 
 
+// courseScheme.pre('save', function(next) {
+//     this.createdAt = new Date();
+//     next();
+// });
+
+
 const courseModel = mongoose.model('Course', courseScheme);
 module.exports = courseModel;

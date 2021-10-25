@@ -1,7 +1,11 @@
 const router = require('express').Router();
-
-router.get('/', (req, res) => {
-    res.render('home');
+const courseService = require('../services/courseService');
+router.get('/', (req, res, next) => {
+    courseService.getAll()
+        .then(courses => {
+            res.render('home', { courses });
+        })
+        .catch(next);
 });
 
 module.exports = router;
