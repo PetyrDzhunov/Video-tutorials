@@ -33,5 +33,15 @@ router.get('/:courseId/details', (req, res, next) => {
         .catch(next);
 });
 
+router.get('/:courseId/enroll', (req, res, next) => {
+    let courseId = req.params.courseId;
+    console.log(req.user._id);
+    courseService.enrollUser(courseId, req.user._id)
+        .then((response) => {
+            res.redirect(`/course/${courseId}/details`);
+        })
+        .catch(next);
+});
+
 
 module.exports = router;
