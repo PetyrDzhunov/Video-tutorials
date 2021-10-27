@@ -7,15 +7,7 @@ router.get('/create', (req, res) => {
 });
 
 router.post('/create', (req, res, next) => {
-    let { title, description, imageUrl, isPublic } = req.body;
-    let courseData = {
-        title,
-        description,
-        imageUrl,
-        isPublic: isPublic == 'on' ? true : false,
-    };
-
-
+    let courseData = extractCourseData(req);
     courseService.create(courseData, req.user._id)
         .then((createdCourse) => {
             res.redirect('/');
@@ -35,7 +27,6 @@ router.get('/:courseId/details', (req, res, next) => {
 
 router.get('/:courseId/enroll', (req, res, next) => {
     let courseId = req.params.courseId;
-    console.log(req.user._id);
     courseService.enrollUser(courseId, req.user._id)
         .then((response) => {
             res.redirect(`/course/${courseId}/details`);
@@ -62,7 +53,28 @@ router.get('/:courseId/edit', (req, res, next) => {
         .catch(next);
 });
 
+router.post('/:courseId/edit', (req, res, next) => {
+    const courseId = req.params.courseId;
+    let courseData = extractCourseData(req);
 
+    courseService.updateOne(courseId, courseData)
+        .then(() => {
+            res.redirect(`/course/${courseId}/details`)
+        })
+        .catch(next)
+});
+
+function extractCourseData(req) {
+    let { title, description, imageUrl, isPublic } = req.body;
+    let courseData = {
+        title,
+        description,
+        imageUrl,
+        isPublic: isPublic == 'on' ? true : false
+    };
+
+    return courseData;
+};
 
 
 module.exports = router;
