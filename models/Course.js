@@ -5,12 +5,14 @@ const courseScheme = new mongoose.Schema({
     title: {
         type: String,
         required: true,
-        unique: true
+        unique: true,
+        minlength: 4,
     },
     description: {
         type: String,
         required: true,
-        maxlength: 50
+        maxlength: 50,
+        minlength: 20
     },
 
     imageUrl: {

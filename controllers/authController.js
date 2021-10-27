@@ -37,7 +37,10 @@ router.post('/register', (req, res, next) => {
         .then((createdUser) => {
             res.redirect('/auth/login');
         })
-        .catch(error => next(error))
+        .catch(err => {
+            let error = Object.keys(err.errors).map(x => ({ message: err.errors[x].message }))[0];
+            res.render('register', { error });
+        })
 });
 
 router.get('/logout', (req, res) => {
