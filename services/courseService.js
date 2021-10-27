@@ -2,9 +2,9 @@ const Course = require('../models/Course');
 
 const getAll = () => Course.find({}).sort({ createdAt: -1 }).lean();
 
-const getOne = (id, userId) => Course.findById(id).populate('usersEnrolled').lean()
+const getOne = (id, userId) => Course.findById(id)
     .then(course => {
-        course.isEnrolled = course.usersEnrolled.some(x => x._id == userId);
+        course.isEnrolled = course.usersEnrolled.includes(userId);
         return course;
     });
 
@@ -20,8 +20,6 @@ const enrollUser = (courseId, userId) => {
             course.usersEnrolled.push(userId);
             return course.save();
         });
-
-
 };
 
 

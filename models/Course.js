@@ -30,7 +30,12 @@ const courseScheme = new mongoose.Schema({
     usersEnrolled: [{
         type: mongoose.Types.ObjectId,
         ref: "User"
-    }]
+    }],
+
+    creator: {
+        type: mongoose.Types.ObjectId,
+        ref: "User"
+    }
 
 });
 
