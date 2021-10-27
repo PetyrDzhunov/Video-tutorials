@@ -26,9 +26,9 @@ router.post('/create', (req, res, next) => {
 
 router.get('/:courseId/details', (req, res, next) => {
     let courseId = req.params.courseId;
-    courseService.getOne(courseId)
+    courseService.getOne(courseId, req.user._id)
         .then(course => {
-            res.render('courseDetails', { course })
+            res.render('courseDetails', course)
         })
         .catch(next);
 });

@@ -1,12 +1,16 @@
 const Course = require('../models/Course');
 
-const getAll = () => Course.find({}).populate('usersEnrolled').sort({ createdAt: -1 }).lean();
+const getAll = () => Course.find({}).sort({ createdAt: -1 }).lean();
 
-const getOne = (id) => Course.findById(id).lean();
+const getOne = (id, userId) => Course.findById(id).populate('usersEnrolled').lean()
+    .then(course => {
+        course.isEnrolled = course.usersEnrolled.some(x => x._id == userId);
+        return course;
+    });
 
 
-const create = async(courseData) => {
-    let course = await new Course({...courseData, createdAt: new Date() });
+const create = (courseData) => {
+    let course = new Course({...courseData, createdAt: new Date() });
     return course.save();
 };
 
