@@ -16,7 +16,7 @@ router.post('/create', (req, res, next) => {
     };
 
 
-    courseService.create(courseData)
+    courseService.create(courseData, req.user._id)
         .then((createdCourse) => {
             res.redirect('/');
         })

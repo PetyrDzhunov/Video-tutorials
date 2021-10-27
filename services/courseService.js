@@ -5,12 +5,13 @@ const getAll = () => Course.find({}).sort({ createdAt: -1 }).lean();
 const getOne = (id, userId) => Course.findById(id)
     .then(course => {
         course.isEnrolled = course.usersEnrolled.includes(userId);
+        course.isOwn = course.creator == userId;
         return course;
     });
 
 
-const create = (courseData) => {
-    let course = new Course({...courseData, createdAt: new Date() });
+const create = (courseData, userId) => {
+    let course = new Course({...courseData, createdAt: new Date(), creator: userId });
     return course.save();
 };
 
