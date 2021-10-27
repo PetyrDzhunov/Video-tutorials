@@ -9,6 +9,7 @@ const getOne = (id, userId) => Course.findById(id)
         return course;
     });
 
+const getMostPopularCourses = (count) => Course.find().sort({ usersEnrolled: -1 }).limit(count).lean();
 
 const create = (courseData, userId) => {
     let course = new Course({...courseData, createdAt: new Date(), creator: userId });
@@ -22,6 +23,7 @@ const deleteCourse = (courseId) => {
 const updateOne = (courseId, courseData) => {
     return Course.updateOne({ _id: courseId }, courseData);
 };
+
 
 const enrollUser = (courseId, userId) => {
     return Course.findById(courseId)
@@ -38,5 +40,6 @@ module.exports = {
     getOne,
     enrollUser,
     deleteCourse,
-    updateOne
+    updateOne,
+    getMostPopularCourses
 }

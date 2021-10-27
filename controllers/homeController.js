@@ -11,14 +11,11 @@ router.get('/', (req, res, next) => {
             })
             .catch(next)
     } else {
-        // courseService.getMostPopularCourses(3)
-        //     .then(courses => {
-        //         res.render('home', { courses });
-        //     });
-        res.render('home');
+        courseService.getMostPopularCourses(3)
+            .then(courses => {
+                res.render('home', { courses });
+            });
     };
-
-
 });
 
 
