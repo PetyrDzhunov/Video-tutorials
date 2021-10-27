@@ -15,6 +15,10 @@ const create = (courseData, userId) => {
     return course.save();
 };
 
+const deleteCourse = (courseId) => {
+    return Course.deleteOne({ _id: courseId });
+};
+
 const enrollUser = (courseId, userId) => {
     return Course.findById(courseId)
         .then(course => {
@@ -26,9 +30,12 @@ const enrollUser = (courseId, userId) => {
 
 
 
+
+
 module.exports = {
     create,
     getAll,
     getOne,
-    enrollUser
+    enrollUser,
+    deleteCourse
 }

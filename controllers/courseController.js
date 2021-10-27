@@ -43,5 +43,14 @@ router.get('/:courseId/enroll', (req, res, next) => {
         .catch(next);
 });
 
+router.get('/:courseId/delete', (req, res, next) => {
+    let courseId = req.params.courseId;
+    courseService.deleteCourse(courseId)
+        .then(() => {
+            res.redirect('/')
+        })
+        .catch(next);
+})
+
 
 module.exports = router;
