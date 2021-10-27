@@ -1,6 +1,12 @@
 const Course = require('../models/Course');
 
-const getAll = () => Course.find({}).sort({ createdAt: -1 }).lean();
+const getAll = (search) => {
+    if (search) {
+        return Course.find({ title: { $regex: search, $options: 'i' } }).sort({ createdAt: -1 }).lean();
+    } else {
+        return Course.find({}).sort({ createdAt: -1 }).lean();
+    }
+}
 
 const getOne = (id, userId) => Course.findById(id)
     .then(course => {

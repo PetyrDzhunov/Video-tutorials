@@ -64,6 +64,7 @@ router.post('/:courseId/edit', (req, res, next) => {
         .catch(next)
 });
 
+
 function extractCourseData(req) {
     let { title, description, imageUrl, isPublic } = req.body;
     let courseData = {
