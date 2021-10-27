@@ -14,6 +14,8 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true,
         unique: true,
+        minlength: 5,
+        validate: /^[a-zA-Z0-9]+$/
     },
 
     enrolledCourses: [{
