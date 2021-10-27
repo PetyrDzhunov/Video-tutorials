@@ -50,7 +50,19 @@ router.get('/:courseId/delete', (req, res, next) => {
             res.redirect('/')
         })
         .catch(next);
-})
+});
+
+router.get('/:courseId/edit', (req, res, next) => {
+    let courseId = req.params.courseId;
+    courseService.getOne(courseId, req.user._id)
+        .then(course => {
+            course.checked = course.isPublic ? 'checked' : '';
+            res.render('editCourse', course)
+        })
+        .catch(next);
+});
+
+
 
 
 module.exports = router;
